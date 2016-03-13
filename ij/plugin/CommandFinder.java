@@ -387,8 +387,8 @@ public class CommandFinder implements PlugIn, ActionListener, WindowListener, Ke
 		closeCheckBox = new JCheckBox("Close window after running command", closeWhenRunning);
 		closeCheckBox.addItemListener(this);
 
-		JPanel northPanel = new JPanel();
-		northPanel.add(new JLabel("Search:"));
+		JPanel northPanel = new JPanel(new BorderLayout());
+		northPanel.add(new JLabel(" Search:"), BorderLayout.WEST);
 		prompt = new JTextField("", 20);
 		prompt.getDocument().addDocumentListener(new PromptDocumentListener());
 		prompt.addKeyListener(this);
