@@ -424,7 +424,7 @@ public class CommandFinder implements PlugIn, ActionListener, WindowListener, Ke
 		JPanel southPanel = new JPanel();
 		southPanel.setLayout(new BorderLayout());
 
-		JPanel optionsPanel = new JPanel();
+		JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		optionsPanel.add(closeCheckBox);
 
 		JPanel buttonsPanel = new JPanel();
