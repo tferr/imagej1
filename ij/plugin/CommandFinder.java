@@ -267,6 +267,13 @@ public class CommandFinder implements PlugIn, ActionListener, WindowListener, Ke
 				int row = table.getSelectedRow();
 				if (row>=0)
 					runCommand(tableModel.getCommand(row));
+			/* Loop through the list using the arrow keys */
+			} else if (key == KeyEvent.VK_UP) {
+				if (table.getSelectedRow() == 0)
+					table.setRowSelectionInterval(tableModel.getRowCount() - 1, tableModel.getRowCount() - 1);
+			} else if (key == KeyEvent.VK_DOWN) {
+				if (table.getSelectedRow() == tableModel.getRowCount() - 1)
+					table.setRowSelectionInterval(0, 0);
 			}
 		}
 	}
