@@ -437,6 +437,18 @@ public class CommandFinder implements PlugIn, ActionListener, WindowListener, Ke
 			}
 		});
 
+		// List the most useful shortcuts in a tooltip. Tooltips
+		// can be an annoyance so we'll increase delay times
+		ToolTipManager ttm = ToolTipManager.sharedInstance();
+		ttm.setInitialDelay(2 * ttm.getInitialDelay());
+		ttm.setReshowDelay(2 * ttm.getReshowDelay());
+		ttm.setDismissDelay(2 * ttm.getDismissDelay());
+		table.setToolTipText("<html>Shortcuts:<br>"
+				+ "&emsp;&uarr; &darr;&ensp; Select items<br>"
+				+ "&emsp;&crarr;&emsp; Open item<br>"
+				+ "&ensp;A-Z&ensp; Alphabetic scroll<br>"
+				+ "&emsp;&#9003;&emsp;Activate search field</html>");
+
 		scrollPane = new JScrollPane(table);
 		populateList("");
 		contentPane.add(scrollPane, BorderLayout.CENTER);
