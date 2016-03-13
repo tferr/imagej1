@@ -407,6 +407,29 @@ public class CommandFinder implements PlugIn, ActionListener, WindowListener, Ke
 		table.addKeyListener(this);
 		table.addMouseListener(this);
 
+		// Auto-scroll table using keystrokes
+		table.addKeyListener(new KeyAdapter() {
+			public void keyTyped(final KeyEvent evt) {
+				if (evt.isControlDown() || evt.isMetaDown())
+					return;
+				final int nRows = tableModel.getRowCount();
+				final char ch = Character.toLowerCase(evt.getKeyChar());
+				if (!Character.isLetterOrDigit(ch)) {
+					return; // Ignore searches for non alpha-numeric characters
+				}
+				final int sRow = table.getSelectedRow();
+				for (int row = (sRow+1) % nRows; row != sRow; row = (row+1) % nRows) {
+					final String rowData = tableModel.getValueAt(row, 0).toString();
+					final char rowCh = Character.toLowerCase(rowData.charAt(0));
+					if (ch == rowCh) {
+						table.setRowSelectionInterval(row, row);
+						table.scrollRectToVisible(table.getCellRect(row, 0, true));
+						break;
+					}
+				}
+			}
+		});
+
 		scrollPane = new JScrollPane(table);
 		populateList("");
 		contentPane.add(scrollPane, BorderLayout.CENTER);
