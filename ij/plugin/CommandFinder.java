@@ -8,12 +8,18 @@
     they can be selected by selecting with the mouse and clicking
     "Run"; alternatively hitting the up or down arrows will move the
     keyboard focus to the list and the selected command can be run
-    with Enter.  Double-clicking on a command in the list should
-    also run the appropriate command.
+    with Enter. When the list has focus, it is also possible to use
+    keyboard "scrolling": E.g., pressing "H" will select the first
+    command starting with the char "H". Pressing "H" again will select
+    the next row starting with the char "H", etc., looping between all
+    "H" starting commands. Double-clicking on a command in the list
+    should also run the appropriate command.
 
     @author Mark Longair <mark-imagej@longair.net>
     @author Johannes Schindelin <johannes.schindelin@gmx.de>
     @author Curtis Rueden <ctrueden@wisc.edu>
+    @author Tiago Ferreira <tiago.ferreira@mail.mcgill.ca>
+
  */
 
 package ij.plugin;
@@ -334,6 +340,17 @@ public class CommandFinder implements PlugIn, ActionListener, WindowListener, Ke
 		}
 	}
 
+	/**
+	 * Displays the Command Finder dialog. If a Command Finder window is
+	 * already being displayed and <tt>initialSearch</tt> contains a valid
+	 * query, it will be closed and a new one displaying the new search
+	 * will be rebuilt at the same screen location.
+	 *
+	 * @param initialSearch
+	 *            The search string that populates Command Finder's search
+	 *            field. It is ignored if contains an invalid query (ie, if
+	 *            it is either <tt>null</tt> or <tt>empty</tt>).
+	 */
 	public void run(String initialSearch) {
 		if (frame!=null) {
 			if (initialSearch!=null && !initialSearch.isEmpty()) {
