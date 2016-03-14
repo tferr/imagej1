@@ -334,10 +334,14 @@ public class CommandFinder implements PlugIn, ActionListener, WindowListener, Ke
 		}
 	}
 
-	public void run(String ignored) {
+	public void run(String initialSearch) {
 		if (frame!=null) {
-			WindowManager.toFront(frame);
-			return;
+			if (initialSearch!=null && !initialSearch.isEmpty()) {
+				frame.dispose(); // Rebuild dialog with new search string
+			} else {
+				WindowManager.toFront(frame);
+				return;
+			}
 		}
 		commandsHash = new Hashtable();
 
@@ -450,7 +454,10 @@ public class CommandFinder implements PlugIn, ActionListener, WindowListener, Ke
 				+ "&emsp;&#9003;&emsp;Activate search field</html>");
 
 		scrollPane = new JScrollPane(table);
-		populateList("");
+		if (initialSearch==null)
+			initialSearch = "";
+		prompt.setText(initialSearch);
+		populateList(initialSearch);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		runButton = new JButton("Run");
